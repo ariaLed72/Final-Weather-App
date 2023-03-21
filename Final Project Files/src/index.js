@@ -42,9 +42,11 @@ function search(event) {
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(changeTemp);
 }
+let celsiusTemperature = null;
 
 function changeTemp(response) {
   let wholeTemp = document.querySelector("#big-temp");
+  celsiusTemperature = Math.round(response.data.temperature.current);
   let temperature = Math.round(response.data.temperature.current);
   wholeTemp.innerHTML = `${temperature}`;
   console.log(response);
@@ -74,7 +76,6 @@ function changeTemp(response) {
 
 function showFahrenheitTemp(event) {
   event.preventDefault();
-  let celsiusTemperature = response.data.temperature.current;
   let fahrenheitElement = document.querySelector("#big-temp");
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
@@ -84,7 +85,6 @@ function showFahrenheitTemp(event) {
 
 function showCelsiusTemp(event) {
   event.preventDefault();
-  let celsiusTemperature = response.data.temperature.current;
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   let celsiusElement = document.querySelector("#big-temp");
