@@ -60,7 +60,7 @@ function displayForecast(response) {
       <div class="weather-forecast-date">
       ${day}
       </div>
-      <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png" 
+      <img src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png" 
       alt="img"
       width="40"/>
       <div class="weather-forecast-temperatures">
@@ -114,7 +114,7 @@ function changeTemp(response) {
   let iconElement = document.querySelector("#weather-icon");
   iconElement.setAttribute(
     "src",
-    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+    `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   iconElement.setAttribute("alt", response.data.condition.description);
 
