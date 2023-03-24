@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function changeDate() {
     minutes = `0${minutes}`;
   }
 
-  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
   let day = days[now.getDay()];
 
   h3.innerHTML = `${hour}:${minutes} ${day} ${month} ${date}, ${year}`;
@@ -44,7 +44,8 @@ function search(event) {
 }
 let celsiusTemperature = null;
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `
@@ -63,10 +64,10 @@ function displayForecast() {
       alt="img"
       width="40"/>
       <div class="weather-forecast-temperatures">
-<span class="weather-forecast-temperature-minimum">
-        10º
-</span>
 <span class="weather-forecast-temperature-maximum">
+        18º
+</span>
+<span class="weather-forecast-temperature-minimum">
         12º
 </span>
 
@@ -78,6 +79,14 @@ function displayForecast() {
   forecastHTML = forecastHTML + `</div>`;
 
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function changeTemp(response) {
@@ -108,6 +117,8 @@ function changeTemp(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   iconElement.setAttribute("alt", response.data.condition.description);
+
+  getForecast(response.data.coordinates);
 }
 
 function showFahrenheitTemp(event) {
