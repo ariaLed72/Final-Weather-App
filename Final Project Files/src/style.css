@@ -126,7 +126,16 @@ h3 {
 
 .weather-forecast-date {
   font-size: 16px;
-  color: darkgrey;
+  color: black;
+  opacity: 0.8;
+}
+
+.weather-forecast-temperature {
+  font-size: 13px;
+}
+
+.weather-forecast-temperature-maximum {
+  opacity: 0.5;
 }
 
 #weather-icon {
