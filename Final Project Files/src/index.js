@@ -65,7 +65,7 @@ function displayForecast(response) {
       width="40"/>
       <div class="weather-forecast-temperatures">
 <span class="weather-forecast-temperature-maximum">
-        18º
+        17º
 </span>
 <span class="weather-forecast-temperature-minimum">
         12º
