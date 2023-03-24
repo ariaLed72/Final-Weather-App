@@ -44,6 +44,42 @@ function search(event) {
 }
 let celsiusTemperature = null;
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `
+  <div class="row" >`;
+
+  let days = ["Thu", "Fri", "Sat", "Sun"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` 
+    <div class="col-2">
+      <div class="weather-forecast-date">
+      ${day}
+      </div>
+      <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png" 
+      alt="img"
+      width="40"/>
+      <div class="weather-forecast-temperatures">
+<span class="weather-forecast-temperature-minimum">
+        10º
+</span>
+<span class="weather-forecast-temperature-maximum">
+        12º
+</span>
+
+      </div>
+    </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function changeTemp(response) {
   let wholeTemp = document.querySelector("#big-temp");
   celsiusTemperature = Math.round(response.data.temperature.current);
@@ -101,6 +137,8 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 let celsiusLink = document.querySelector("#celsius-conversion");
 celsiusLink.addEventListener("click", showCelsiusTemp);
+
+displayForecast();
 
 //function showPosition(position) {
 // let lat = position.coordinates.lat;
