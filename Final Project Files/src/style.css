@@ -92,7 +92,7 @@ h3 {
 
 .image {
   border-radius: 10px;
-  height: 700px;
+  height: 350px;
   border: 2px black;
   box-shadow: 2px 5px 5px lightgrey;
 }
@@ -105,7 +105,7 @@ h3 {
 }
 
 .body-card {
-  height: 450px;
+  height: 575px;
   width: 525px;
   box-shadow: 2px 5px 10px grey;
   margin: auto;
@@ -117,6 +117,16 @@ h3 {
 .first {
   font-size: 25px;
   text-shadow: 1px 3px 3px lightgrey;
+}
+
+.weather-forecast {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.weather-forecast-date {
+  font-size: 16px;
+  color: darkgrey;
 }
 
 #weather-icon {
@@ -164,10 +174,15 @@ h3 {
   margin: 0 auto;
   padding: 10px 20px;
   position: relative;
-  top: -240px;
+  top: -340px;
   color: rgb(207, 207, 207);
   text-shadow: 1px 3px 3px rgb(0, 0, 0);
   font-weight: bold;
+}
+
+#forecast-row {
+  position: relative;
+  top: -200px;
 }
 
 #git-link {
