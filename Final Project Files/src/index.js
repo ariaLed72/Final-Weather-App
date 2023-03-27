@@ -94,7 +94,7 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=imperial`;
   console.log(apiUrl);
 
   axios.get(apiUrl).then(displayForecast);
@@ -105,14 +105,14 @@ function search(event) {
   let searchInput = document.querySelector("#search-engine");
   let changeCity = document.querySelector("h1");
   changeCity.textContent = `${searchInput.value}`;
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}&key=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}&key=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(changeTemp);
 }
-let celsiusTemperature = null;
+let fahrenheitTemperature = null;
 
 function changeTemp(response) {
   let wholeTemp = document.querySelector("#big-temp");
-  celsiusTemperature = Math.round(response.data.temperature.current);
+  fahrenheitTemperature = Math.round(response.data.temperature.current);
   let temperature = Math.round(response.data.temperature.current);
   wholeTemp.innerHTML = `${temperature}`;
   console.log(response);
@@ -142,21 +142,21 @@ function changeTemp(response) {
   getForecast(response.data.coordinates);
 }
 
-function showFahrenheitTemp(event) {
-  event.preventDefault();
-  let fahrenheitElement = document.querySelector("#big-temp");
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  fahrenheitElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
 function showCelsiusTemp(event) {
   event.preventDefault();
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   let celsiusElement = document.querySelector("#big-temp");
+  let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
   celsiusElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  let fahrenheitElement = document.querySelector("#big-temp");
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  fahrenheitElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 let apiKey = "42ba1b13f6cc540e038b0aeaao0t76f8";
@@ -164,16 +164,16 @@ let apiKey = "42ba1b13f6cc540e038b0aeaao0t76f8";
 let form = document.querySelector("form");
 form.addEventListener("submit", search);
 
-let fahrenheitLink = document.querySelector("#fahrenheit-conversion");
-fahrenheitLink.addEventListener("click", showFahrenheitTemp);
-
 let celsiusLink = document.querySelector("#celsius-conversion");
 celsiusLink.addEventListener("click", showCelsiusTemp);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-conversion");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 //function showPosition(response) {
 // let lat = response.data.coordinates.latitude;
 // let lon = response.data.coordinates.longitude;
-//let apiUrlPosition = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+//let apiUrlPosition = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=imperial`;
 //axios.get(apiUrlPosition).then(changeTemp);
 //}
 
